@@ -6,6 +6,16 @@ Monorepo for reusable app foundations:
 - `apps/react-spa`: React + Vite private/admin SPA
 - `apps/astro`: Astro marketing site
 
+## Visual preview
+
+### React SPA settings experience
+
+![React SPA settings and teams screen](docs/images/readme/settings-teams.png)
+
+### Astro marketing hero experience
+
+![Astro marketing homepage hero](docs/images/readme/marketing-hero.png)
+
 ## App templates in detail
 
 ### `apps/go-api` - Backend API template
