@@ -1,8 +1,21 @@
 package jobs
 
-// TODO
+import (
+	"errors"
+	"testing"
 
-/* type CleanupHandlerSuite struct {
+	"github.com/stretchr/testify/suite"
+	"github.com/yca-software/2chi-kit/go-api/internals/services"
+	api_key_service "github.com/yca-software/2chi-kit/go-api/internals/services/api_key"
+	auth_service "github.com/yca-software/2chi-kit/go-api/internals/services/auth"
+	invitation_service "github.com/yca-software/2chi-kit/go-api/internals/services/invitation"
+	organization_service "github.com/yca-software/2chi-kit/go-api/internals/services/organization"
+	user_refresh_token_service "github.com/yca-software/2chi-kit/go-api/internals/services/user_refresh_token"
+	yca_error "github.com/yca-software/go-common/error"
+	yca_log "github.com/yca-software/go-common/logger"
+)
+
+type CleanupHandlerSuite struct {
 	suite.Suite
 }
 
@@ -80,4 +93,3 @@ func (s *CleanupHandlerSuite) TestIsNoRowsAffectedError() {
 	s.False(isNoRowsAffectedError(errors.New("boom")))
 	s.False(isNoRowsAffectedError(nil))
 }
-*/

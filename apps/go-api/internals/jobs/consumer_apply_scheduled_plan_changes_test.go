@@ -1,7 +1,6 @@
 package jobs
 
-// TODO
-/* import (
+import (
 	"context"
 	"errors"
 	"testing"
@@ -48,4 +47,3 @@ func (s *ApplyScheduledPlanChangesHandlerSuite) TestPropagatesError() {
 	s.Require().Error(err)
 	paddleMock.AssertExpectations(s.T())
 }
-*/

@@ -15,12 +15,12 @@ type cleanupStep struct {
 
 func (c *Consumers) cleanupHandler() func() error {
 	steps := []cleanupStep{
-		/* {name: "organization.CleanupArchived", run: c.srvs.Organization.CleanupArchived},
+		{name: "organization.CleanupArchived", run: c.srvs.Organization.CleanupArchived},
 		{name: "user_refresh_token.CleanupStaleUnused", run: c.srvs.UserRefreshToken.CleanupStaleUnused},
 		{name: "auth.CleanupStalePasswordResetTokens", run: c.srvs.Auth.CleanupStalePasswordResetTokens},
 		{name: "auth.CleanupStaleEmailVerificationTokens", run: c.srvs.Auth.CleanupStaleEmailVerificationTokens},
 		{name: "invitation.CleanupStale", run: c.srvs.Invitation.CleanupStale},
-		{name: "api_key.CleanupStaleExpired", run: c.srvs.ApiKey.CleanupStaleExpired}, */
+		{name: "api_key.CleanupStaleExpired", run: c.srvs.ApiKey.CleanupStaleExpired},
 	}
 	return func() error {
 		var wg sync.WaitGroup
