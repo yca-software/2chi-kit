@@ -21,7 +21,7 @@
     "@paddle/paddle-js": "^1.6.4",
     "@posthog/react": "^1.7.1",
     "@tanstack/react-query": "^5.90.20",
-    "@yca-software/design-system": "^0.2.4",
+    "@yca-software/design-system": "^0.2.5",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",

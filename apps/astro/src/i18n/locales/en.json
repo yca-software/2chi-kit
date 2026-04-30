@@ -1,0 +1,216 @@
+{
+	"brand": {
+		"name": "ShipStack"
+	},
+	"meta": {
+		"title": "ShipStack - Production Code Template",
+		"description": "Launch a polished marketing site, API, and app from one production-ready template."
+	},
+	"languageBar": {
+		"english": "English",
+		"french": "Francais",
+		"label": "Language"
+	},
+	"nav": {
+		"features": "Features",
+		"showcase": "Walkthrough",
+		"projects": "In the box",
+		"pricing": "Pricing",
+		"faq": "FAQ",
+		"cta": "Start free setup"
+	},
+	"hero": {
+		"subtitle": "Premium starter stack for SaaS teams",
+		"title": "Launch faster with a polished baseline your customers can trust from day one",
+		"description": "ShipStack combines Astro marketing, a React app shell, and backend conventions so your team can move directly from idea to signup-ready product delivery.",
+		"imageAlt": "Abstract gradient hero visual",
+		"primaryCta": "Start free setup",
+		"secondaryCta": "See pricing plans"
+	},
+	"trustBadges": {
+		"title": "Built for modern product teams",
+		"items": [
+			"TypeScript-first",
+			"Monorepo-ready",
+			"Astro marketing",
+			"CI-friendly defaults"
+		]
+	},
+	"logoCloud": {
+		"title": "Fits the stack your team already uses",
+		"logos": [
+			{ "alt": "Astro" },
+			{ "alt": "React" },
+			{ "alt": "Go API" },
+			{ "alt": "Turborepo" }
+		]
+	},
+	"featuresSection": {
+		"subtitle": "Template architecture",
+		"title": "A clear foundation you can ship and evolve",
+		"description": "The template mirrors how real teams work: composable UI blocks, organized app boundaries, and upgrade-friendly conventions across the stack.",
+		"insightEyebrow": "Structure",
+		"insightTitle": "Start clean, stay organized",
+		"insightDescription": "Use an opinionated folder structure and reusable sections to launch quickly without painting yourself into a corner six weeks later.",
+		"insightImageAlt": "Stylized analytics bars",
+		"deliveryEyebrow": "Scale",
+		"deliveryTitle": "Grow without rewriting your marketing stack",
+		"deliveryDescription": "As your design system evolves, marketing pages keep pace with shared tokens and components, so brand and product stay aligned.",
+		"deliveryImageAlt": "Stylized shipping pipeline"
+	},
+	"stats": {
+		"uptime": "3 app surfaces included",
+		"lean": "Fast static marketing output",
+		"a11y": "Accessible component patterns",
+		"custom": "Built to extend, not fight"
+	},
+	"testimonial": {
+		"quote": "We replaced two weeks of setup with one afternoon and shipped our first customer-facing flow in the same sprint.",
+		"attribution": "Maya Torres",
+		"role": "Lead Engineer, Northbound Labs",
+		"avatarAlt": "Maya Torres"
+	},
+	"video": {
+		"title": "See how the template works end to end",
+		"description": "This walkthrough shows how marketing, app, and API pieces fit together. Replace this embed with your own product demo when you launch.",
+		"titleAttr": "ShipStack walkthrough video"
+	},
+	"bento": {
+		"eyebrow": "What teams love",
+		"title": "Everything you need to move from idea to launch",
+		"description": "Start with a complete baseline, then adapt only what matters for your product and team workflow.",
+		"cells": [
+			{
+				"title": "Composable marketing sections",
+				"description": "Hero, social proof, feature rows, pricing, FAQ, and CTA blocks built to mix and match.",
+				"wide": true
+			},
+			{
+				"title": "Great developer experience",
+				"description": "Sane defaults for scripts, workspace structure, and shared tooling from day one.",
+				"wide": false
+			},
+			{
+				"title": "Documentation-friendly setup",
+				"description": "Clear conventions make onboarding easier for new contributors and client teams.",
+				"wide": false
+			},
+			{
+				"title": "Extensible by design",
+				"description": "Add routes, modules, and product verticals without rebuilding the foundation.",
+				"wide": true
+			}
+		]
+	},
+	"ctaBanner": {
+		"title": "Ready to launch with a better starting point?",
+		"description": "Use ShipStack as your baseline, customize the branding, and ship a polished first release faster.",
+		"primary": "Start with ShipStack",
+		"secondary": "Jump to FAQ"
+	},
+	"projects": {
+		"eyebrow": "What is in the box",
+		"title": "Three launch-ready foundations",
+		"live": "Included",
+		"comingSoon": "Optional add-on",
+		"items": [
+			{
+				"name": "Marketing site",
+				"description": "Astro landing page template with SEO and conversion-focused sections.",
+				"href": "/",
+				"status": "live"
+			},
+			{
+				"name": "Application shell",
+				"description": "React SPA baseline with room for auth, dashboard flows, and billing states.",
+				"href": "/",
+				"status": "live"
+			},
+			{
+				"name": "API service module",
+				"description": "Backend slice starter for endpoints, services, and data access conventions.",
+				"href": "/",
+				"status": "coming-soon"
+			}
+		]
+	},
+	"pricing": {
+		"eyebrow": "Signup-first pricing",
+		"title": "Choose your plan and land on the right checkout instantly",
+		"description": "Every pricing CTA carries checkout intent so visitors start signup with the exact plan they selected.",
+		"tiers": [
+			{
+				"name": "Solo",
+				"price": "—",
+				"period": "from app",
+				"description": "Best for indie builders and MVP teams who need a clean production template quickly.",
+				"features": [
+					"Starter template access",
+					"Deep-link signup flow",
+					"Fast customization path"
+				],
+				"cta": "Start Solo checkout"
+			},
+			{
+				"name": "Team",
+				"price": "—",
+				"period": "from app",
+				"description": "For product teams that want shared conventions and a scalable base across projects.",
+				"features": [
+					"Everything in Solo",
+					"Preselected team checkout intent",
+					"Built for multi-project reuse"
+				],
+				"cta": "Start Team checkout",
+				"highlighted": true
+			}
+		]
+	},
+	"faq": {
+		"eyebrow": "FAQ",
+		"title": "Questions teams ask before adopting ShipStack",
+		"description": "Everything you need to know before using the template for your next launch.",
+		"items": [
+			{
+				"question": "What do I get in the template?",
+				"answer": "You get a marketing site structure, app baseline, and backend conventions you can extend for your product."
+			},
+			{
+				"question": "Can I fully rebrand this?",
+				"answer": "Yes. Replace copy, assets, and tokens while keeping the same component structure and deployment flow."
+			},
+			{
+				"question": "How are updates handled?",
+				"answer": "Keep your product code in your own modules and pull template improvements selectively as your stack evolves."
+			},
+			{
+				"question": "Is this only for SaaS products?",
+				"answer": "No. It is designed for any product team that wants a fast, structured starting point for web delivery."
+			}
+		]
+	},
+	"whySection": {
+		"subtitle": "Why ShipStack",
+		"title": "A template built for speed, consistency, and ownership",
+		"description": "Ship quickly without sacrificing maintainability or design quality.",
+		"cards": [
+			{
+				"title": "Move faster from day one",
+				"description": "Start from a practical architecture instead of spending your first sprint on boilerplate."
+			},
+			{
+				"title": "Stay consistent across surfaces",
+				"description": "Use shared components and patterns so marketing and product feel like one brand."
+			},
+			{
+				"title": "Own your stack end to end",
+				"description": "Everything is customizable so your team can evolve the template into your long-term product."
+			}
+		]
+	},
+	"footer": {
+		"description": "Production-minded code template for teams shipping web products.",
+		"attribution": "Built with the shared design system and ready to customize for your brand.",
+		"contactEmail": "hello@shipstack.dev"
+	}
+}

@@ -1,0 +1,216 @@
+{
+	"brand": {
+		"name": "ShipStack"
+	},
+	"meta": {
+		"title": "ShipStack - Modele de code production",
+		"description": "Lancez un site marketing, une API et une app avec un modele pret pour la production."
+	},
+	"languageBar": {
+		"english": "English",
+		"french": "Français",
+		"label": "Langue"
+	},
+	"nav": {
+		"features": "Fonctionnalités",
+		"showcase": "Walkthrough",
+		"projects": "Contenu",
+		"pricing": "Tarifs",
+		"faq": "FAQ",
+		"cta": "Demarrer la mise en place"
+	},
+	"hero": {
+		"subtitle": "Base premium pour equipes SaaS",
+		"title": "Lancez plus vite avec un socle fiable qui inspire confiance des le premier jour",
+		"description": "ShipStack assemble marketing Astro, socle React et conventions backend pour faire passer votre equipe de l'idee a un produit pret pour l'inscription.",
+		"imageAlt": "Visuel abstrait en dégradé pour le héros",
+		"primaryCta": "Demarrer la mise en place",
+		"secondaryCta": "Voir les tarifs"
+	},
+	"trustBadges": {
+		"title": "Conçu pour les equipes produit modernes",
+		"items": [
+			"TypeScript d'abord",
+			"Monorepo pret",
+			"Marketing Astro",
+			"Valeurs par defaut compatibles CI"
+		]
+	},
+	"logoCloud": {
+		"title": "Compatible avec la stack que votre equipe utilise deja",
+		"logos": [
+			{ "alt": "Astro" },
+			{ "alt": "React" },
+			{ "alt": "Go API" },
+			{ "alt": "Turborepo" }
+		]
+	},
+	"featuresSection": {
+		"subtitle": "Architecture du modele",
+		"title": "Une base claire que vous pouvez livrer et faire evoluer",
+		"description": "Le modele suit la realite des equipes: blocs UI composables, frontieres applicatives claires et conventions faciles a faire evoluer.",
+		"insightEyebrow": "Structure",
+		"insightTitle": "Demarrez propre, restez organises",
+		"insightDescription": "Profitez d'une structure opinionated et de sections reutilisables pour aller vite sans bloquer votre evolution dans quelques semaines.",
+		"insightImageAlt": "Graphiques analytiques stylisés",
+		"deliveryEyebrow": "Evolution",
+		"deliveryTitle": "Faites grandir la stack marketing sans tout refaire",
+		"deliveryDescription": "Quand le design system evolue, vos pages marketing suivent avec les memes tokens et composants que le produit.",
+		"deliveryImageAlt": "Pipeline de livraison stylisé"
+	},
+	"stats": {
+		"uptime": "3 surfaces d'app incluses",
+		"lean": "Sortie marketing statique rapide",
+		"a11y": "Patterns de composants accessibles",
+		"custom": "Conçu pour etre etendu"
+	},
+	"testimonial": {
+		"quote": "Nous avons remplace deux semaines de setup par un apres-midi et livre un premier parcours client dans le meme sprint.",
+		"attribution": "Maya Torres",
+		"role": "Lead Engineer, Northbound Labs",
+		"avatarAlt": "Maya Torres"
+	},
+	"video": {
+		"title": "Voyez comment le modele fonctionne de bout en bout",
+		"description": "Ce walkthrough montre comment marketing, app et API s'assemblent. Remplacez cette video avec votre propre demo au lancement.",
+		"titleAttr": "Video de walkthrough ShipStack"
+	},
+	"bento": {
+		"eyebrow": "Ce que les equipes apprecient",
+		"title": "Tout ce qu'il faut pour passer de l'idee au lancement",
+		"description": "Commencez avec une base complete, puis adaptez uniquement ce qui compte pour votre produit.",
+		"cells": [
+			{
+				"title": "Sections marketing composables",
+				"description": "Hero, preuve sociale, blocs de fonctionnalites, tarifs, FAQ et CTA a combiner selon votre besoin.",
+				"wide": true
+			},
+			{
+				"title": "Excellente experience developpeur",
+				"description": "Valeurs par defaut solides pour scripts, organisation workspace et outillage partage.",
+				"wide": false
+			},
+			{
+				"title": "Setup clair pour la documentation",
+				"description": "Des conventions lisibles qui facilitent l'onboarding de nouveaux contributeurs.",
+				"wide": false
+			},
+			{
+				"title": "Extensible par design",
+				"description": "Ajoutez des routes, modules et verticales produit sans reconstruire les fondations.",
+				"wide": true
+			}
+		]
+	},
+	"ctaBanner": {
+		"title": "Pret a lancer avec un meilleur point de depart ?",
+		"description": "Utilisez ShipStack comme baseline, personnalisez la marque et publiez une premiere version plus vite.",
+		"primary": "Commencer avec ShipStack",
+		"secondary": "Aller a la FAQ"
+	},
+	"projects": {
+		"eyebrow": "Ce que vous recevez",
+		"title": "Trois fondations pretes pour le lancement",
+		"live": "Inclus",
+		"comingSoon": "Optionnel",
+		"items": [
+			{
+				"name": "Site marketing",
+				"description": "Template de landing Astro avec SEO et sections pensees pour la conversion.",
+				"href": "/",
+				"status": "live"
+			},
+			{
+				"name": "Socle application",
+				"description": "Base React SPA pour auth, dashboard et etats de facturation.",
+				"href": "/",
+				"status": "live"
+			},
+			{
+				"name": "Module service API",
+				"description": "Point de depart backend pour endpoints, services et conventions d'acces aux donnees.",
+				"href": "/",
+				"status": "coming-soon"
+			}
+		]
+	},
+	"pricing": {
+		"eyebrow": "Tarification orientee inscription",
+		"title": "Choisissez un plan et ouvrez directement le bon checkout",
+		"description": "Chaque CTA de tarif transmet checkoutIntent pour que les visiteurs demarrent l'inscription sur la bonne offre.",
+		"tiers": [
+			{
+				"name": "Solo",
+				"price": "—",
+				"period": "depuis l'app",
+				"description": "Ideal pour indie builders et equipes MVP qui ont besoin d'une base production rapidement.",
+				"features": [
+					"Acces au template de base",
+					"Flux d'inscription en lien profond",
+					"Chemin de personnalisation rapide"
+				],
+				"cta": "Demarrer checkout Solo"
+			},
+			{
+				"name": "Team",
+				"price": "—",
+				"period": "depuis l'app",
+				"description": "Pour les equipes produit qui veulent des conventions partagees et une base qui scale.",
+				"features": [
+					"Tout ce qui est dans Solo",
+					"Checkout intent Team preselectionne",
+					"Concu pour reutilisation multi-projets"
+				],
+				"cta": "Demarrer checkout Team",
+				"highlighted": true
+			}
+		]
+	},
+	"faq": {
+		"eyebrow": "FAQ",
+		"title": "Questions frequentes avant d'adopter ShipStack",
+		"description": "Tout ce qu'il faut savoir avant d'utiliser le modele pour votre prochain lancement.",
+		"items": [
+			{
+				"question": "Que contient le modele ?",
+				"answer": "Vous obtenez une structure marketing, une base app et des conventions backend que vous pouvez etendre."
+			},
+			{
+				"question": "Peut-on rebrander completement ?",
+				"answer": "Oui. Remplacez textes, assets et tokens tout en conservant la structure des composants et le flux de deploiement."
+			},
+			{
+				"question": "Comment gerer les mises a jour ?",
+				"answer": "Gardez votre code produit dans vos modules et integrez les ameliorations du template de facon selective."
+			},
+			{
+				"question": "Est-ce reserve aux produits SaaS ?",
+				"answer": "Non. Le modele convient a toute equipe qui veut un point de depart rapide et structure pour le web."
+			}
+		]
+	},
+	"whySection": {
+		"subtitle": "Pourquoi ShipStack",
+		"title": "Un modele pense pour vitesse, coherence et maitrise",
+		"description": "Livrez vite sans sacrifier la maintenabilite ni la qualite visuelle.",
+		"cards": [
+			{
+				"title": "Allez plus vite des le premier jour",
+				"description": "Partez d'une architecture pratique au lieu de depenser le premier sprint en boilerplate."
+			},
+			{
+				"title": "Restez coherents entre surfaces",
+				"description": "Utilisez les memes composants et patterns pour aligner marketing et produit."
+			},
+			{
+				"title": "Gardez la maitrise de bout en bout",
+				"description": "Tout est personnalisable pour faire evoluer le modele vers votre produit long terme."
+			}
+		]
+	},
+	"footer": {
+		"description": "Modele de code orienté production pour equipes qui livrent des produits web.",
+		"attribution": "Construit avec le design system partage et pret a personnaliser pour votre marque.",
+		"contactEmail": "hello@shipstack.dev"
+	}
+}

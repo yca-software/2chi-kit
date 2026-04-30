@@ -1,0 +1,47 @@
+---
+import type { AlternateLink } from "../components/SeoHead.astro";
+import SeoHead from "../components/SeoHead.astro";
+import "../styles/global.css";
+
+export interface Props {
+	title: string;
+	description: string;
+	canonicalPath?: string;
+	canonical?: string;
+	alternates?: AlternateLink[];
+	lang?: string;
+}
+
+const {
+	title,
+	description,
+	canonicalPath,
+	canonical,
+	alternates,
+	lang = "en",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang={lang}>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap"
+			rel="stylesheet"
+		/>
+		<SeoHead
+			title={title}
+			description={description}
+			canonicalPath={canonicalPath}
+			canonical={canonical}
+			alternates={alternates}
+		/>
+	</head>
+	<body>
+		<slot />
+	</body>
+</html>

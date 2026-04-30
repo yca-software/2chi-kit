@@ -1,0 +1,40 @@
+---
+export interface AlternateLink {
+	hreflang: string;
+	href: string;
+}
+
+export interface Props {
+	title: string;
+	description: string;
+	/** Path after origin, e.g. `/` or `/fr/`. Ignored if `canonical` is set. */
+	canonicalPath?: string;
+	/** Full canonical URL (preferred when base path must match `import.meta.env.BASE_URL`). */
+	canonical?: string;
+	alternates?: AlternateLink[];
+}
+
+const {
+	title,
+	description,
+	canonicalPath = "/",
+	alternates,
+	canonical: canonicalOverride,
+} = Astro.props;
+const site = Astro.site?.toString().replace(/\/$/, "") ?? "https://example.com";
+const canonical = canonicalOverride ?? `${site}${canonicalPath}`;
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:type" content="website" />
+<meta property="og:url" content={canonical} />
+<meta name="twitter:card" content="summary_large_image" />
+{
+	alternates?.map((alt) => (
+		<link rel="alternate" hreflang={alt.hreflang} href={alt.href} />
+	))
+}

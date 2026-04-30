@@ -7,7 +7,6 @@
     "skipLibCheck": true,
     "moduleResolution": "bundler",
     "types": ["vite/client", "react", "react-dom"],
-    "typeRoots": ["./node_modules", "./node_modules/@types"],
     "resolvePackageJsonExports": true,
     "resolvePackageJsonImports": true,
     "allowImportingTsExtensions": true,

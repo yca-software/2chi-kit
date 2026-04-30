@@ -1,0 +1,267 @@
+---
+import {
+	BentoFeatures,
+	CtaBanner,
+	FaqSection,
+	FeatureMedia,
+	Footer,
+	HeroSplit,
+	LogoCloud,
+	Navigation,
+	PricingSection,
+	Section,
+	ServiceCard,
+	StatsStrip,
+	Testimonial,
+	TrustBadges,
+	VideoShowcase,
+} from "@yca-software/design-system";
+import type { Locale } from "../i18n/config";
+import { loadMessages } from "../i18n/loadMessages";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ProjectLaunches from "./ProjectLaunches.astro";
+import type { AlternateLink } from "./SeoHead.astro";
+
+interface Props {
+	locale: Locale;
+}
+
+const { locale } = Astro.props;
+const m = loadMessages(locale);
+
+const appUrl = import.meta.env.PUBLIC_APP_URL || "http://localhost:3000";
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const asset = (path: string) => `${base}${path}`;
+const starterSignupHref = `${appUrl}/signup?checkoutIntent=starter`;
+
+const enPath = import.meta.env.BASE_URL;
+const frPath = `${enPath}fr/`;
+const canonicalHref = Astro.site
+	? new URL(locale === "en" ? enPath : frPath, Astro.site).href
+	: undefined;
+
+const alternates: AlternateLink[] | undefined = Astro.site
+	? [
+			{ hreflang: "en", href: new URL(enPath, Astro.site).href },
+			{ hreflang: "fr", href: new URL(frPath, Astro.site).href },
+			{ hreflang: "x-default", href: new URL(enPath, Astro.site).href },
+		]
+	: undefined;
+
+const navLinks = [
+	{ label: m.nav.features, href: "#features" },
+	{ label: m.nav.pricing, href: "#pricing" },
+	{ label: m.nav.projects, href: "#projects" },
+	{ label: m.nav.showcase, href: "#showcase" },
+	{ label: m.nav.faq, href: "#faq" },
+];
+
+const checkoutIntents = ["starter", "pro"] as const;
+const pricingTiers = m.pricing.tiers.map((tier, idx) => ({
+	name: tier.name,
+	price: tier.price,
+	period: tier.period,
+	description: tier.description,
+	features: tier.features,
+	cta: {
+		label: tier.cta,
+		href: `${appUrl}/signup?checkoutIntent=${checkoutIntents[idx]}`,
+	},
+	...(tier.highlighted ? { highlighted: true as const } : {}),
+}));
+
+const homeHref = locale === "en" ? enPath : frPath;
+const projects = m.projects.items.map((p) => ({
+	name: p.name,
+	description: p.description,
+	href: p.href === "/" ? homeHref : p.href,
+	status: p.status as "live" | "coming-soon",
+}));
+
+const statsStrip = [
+	{ value: "99.9%", label: m.stats.uptime },
+	{ value: "< 100kb", label: m.stats.lean },
+	{ value: "A11y", label: m.stats.a11y },
+	{ value: "∞", label: m.stats.custom },
+];
+
+const logoSources = [
+	asset("/marketing/logo-a.svg"),
+	asset("/marketing/logo-b.svg"),
+	asset("/marketing/logo-c.svg"),
+	asset("/marketing/logo-d.svg"),
+];
+---
+
+<BaseLayout
+	title={m.meta.title}
+	description={m.meta.description}
+	canonical={canonicalHref}
+	alternates={alternates}
+	lang={locale === "en" ? "en" : "fr"}
+>
+	<Navigation
+		client:load
+		logo={m.brand.name}
+		links={navLinks}
+		cta={{ label: m.nav.cta, href: starterSignupHref }}
+		languageSwitcher={{
+			ariaLabel: m.languageBar.label,
+			currentCode: locale,
+			options: [
+				{ code: "en", label: m.languageBar.english, href: enPath },
+				{ code: "fr", label: m.languageBar.french, href: frPath },
+			],
+		}}
+	/>
+	<main class="relative space-y-6 overflow-hidden pt-16">
+		<div
+			aria-hidden="true"
+			class="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[34rem] bg-[radial-gradient(ellipse_at_top,hsl(221_83%_53%_/_0.18),transparent_58%)]"
+		/>
+		<HeroSplit
+			id="top"
+			subtitle={m.hero.subtitle}
+			title={m.hero.title}
+			description={m.hero.description}
+			image={{
+				src: asset("/marketing/hero.svg"),
+				alt: m.hero.imageAlt,
+			}}
+			primaryAction={{ label: m.hero.primaryCta, href: starterSignupHref }}
+			secondaryAction={{ label: m.hero.secondaryCta, href: "#pricing" }}
+		/>
+
+		<TrustBadges
+			title={m.trustBadges.title}
+			items={m.trustBadges.items.map((label) => ({ label }))}
+		/>
+
+		<StatsStrip id="stats" stats={statsStrip} />
+
+		<Section
+			id="features"
+			subtitle={m.featuresSection.subtitle}
+			title={m.featuresSection.title}
+			description={m.featuresSection.description}
+		>
+			<div class="space-y-4">
+				<FeatureMedia
+					eyebrow={m.featuresSection.insightEyebrow}
+					title={m.featuresSection.insightTitle}
+					description={m.featuresSection.insightDescription}
+					image={{
+						src: asset("/marketing/feature-analytics.svg"),
+						alt: m.featuresSection.insightImageAlt,
+					}}
+					imagePosition="left"
+				/>
+				<FeatureMedia
+					eyebrow={m.featuresSection.deliveryEyebrow}
+					title={m.featuresSection.deliveryTitle}
+					description={m.featuresSection.deliveryDescription}
+					image={{
+						src: asset("/marketing/feature-ship.svg"),
+						alt: m.featuresSection.deliveryImageAlt,
+					}}
+					imagePosition="right"
+				/>
+			</div>
+		</Section>
+
+		<PricingSection
+			id="pricing"
+			eyebrow={m.pricing.eyebrow}
+			title={m.pricing.title}
+			description={m.pricing.description}
+			tiers={pricingTiers}
+		/>
+
+		<VideoShowcase
+			id="showcase"
+			title={m.video.title}
+			description={m.video.description}
+			embedUrl="https://www.youtube.com/embed/ScMzIvxBSi4"
+			titleAttr={m.video.titleAttr}
+		/>
+
+		<Testimonial
+			quote={m.testimonial.quote}
+			attribution={m.testimonial.attribution}
+			role={m.testimonial.role}
+			avatar={{
+				src: asset("/marketing/avatar.svg"),
+				alt: m.testimonial.avatarAlt,
+			}}
+		/>
+
+		<LogoCloud
+			title={m.logoCloud.title}
+			logos={m.logoCloud.logos.map((logo, i) => ({
+				src: logoSources[i] ?? logoSources[0],
+				alt: logo.alt,
+			}))}
+		/>
+
+		<BentoFeatures
+			id="bento"
+			eyebrow={m.bento.eyebrow}
+			title={m.bento.title}
+			description={m.bento.description}
+			cells={m.bento.cells.map((cell) => ({
+				title: cell.title,
+				description: cell.description,
+				...(cell.wide ? { className: "md:col-span-2" } : {}),
+			}))}
+		/>
+
+		<CtaBanner
+			id="contact"
+			variant="gradient"
+			title={m.ctaBanner.title}
+			description={m.ctaBanner.description}
+			primaryAction={{ label: m.ctaBanner.primary, href: "#features" }}
+			secondaryAction={{ label: m.ctaBanner.secondary, href: "#faq" }}
+		/>
+
+		<ProjectLaunches
+			eyebrow={m.projects.eyebrow}
+			title={m.projects.title}
+			liveLabel={m.projects.live}
+			comingSoonLabel={m.projects.comingSoon}
+			projects={projects}
+		/>
+
+		<FaqSection
+			id="faq"
+			eyebrow={m.faq.eyebrow}
+			title={m.faq.title}
+			description={m.faq.description}
+			items={m.faq.items}
+		/>
+
+		<div class="rounded-[2rem] border border-slate-200/70 bg-white/70 px-4 py-6 shadow-[0_12px_45px_rgba(15,23,42,0.05)] backdrop-blur md:px-6">
+			<Section
+				subtitle={m.whySection.subtitle}
+				title={m.whySection.title}
+				description={m.whySection.description}
+			>
+				<div class="grid gap-4 md:grid-cols-3">
+					{
+						m.whySection.cards.map((card) => (
+							<ServiceCard title={card.title} description={card.description} />
+						))
+					}
+				</div>
+			</Section>
+		</div>
+	</main>
+	<Footer
+		logo={m.brand.name}
+		description={m.footer.description}
+		links={navLinks}
+		contact={{ email: m.footer.contactEmail }}
+		attribution={m.footer.attribution}
+		className="mt-12"
+	/>
+</BaseLayout>

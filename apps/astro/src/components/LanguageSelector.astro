@@ -1,0 +1,60 @@
+---
+interface LanguageSelectorOption {
+	code: string;
+	label: string;
+	href: string;
+}
+
+interface Props {
+	ariaLabel?: string;
+	currentCode: string;
+	options: LanguageSelectorOption[];
+}
+
+const { ariaLabel, currentCode, options } = Astro.props;
+const current =
+	options.find((option) => option.code === currentCode) ?? options[0];
+---
+
+<div class="fixed right-28 top-3 z-60 hidden md:block lg:right-32">
+	<details class="group relative">
+		<summary
+			class="flex size-9 cursor-pointer list-none items-center justify-center rounded-md border border-border/60 bg-background/90 text-foreground shadow-sm backdrop-blur-sm hover:bg-background"
+			aria-label={ariaLabel}
+			title={current?.label}
+		>
+			<svg
+				viewBox="0 0 24 24"
+				class="size-4"
+				fill="none"
+				stroke="currentColor"
+				stroke-width="2"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				aria-hidden="true"
+			>
+				<circle cx="12" cy="12" r="10"></circle>
+				<path d="M2 12h20"></path>
+				<path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10Z"></path>
+			</svg>
+		</summary>
+		<div class="absolute right-0 mt-2 min-w-36 rounded-md border border-border bg-popover p-1 text-popover-foreground shadow-md">
+			{
+				options.map((option) => {
+					const isCurrent = option.code === currentCode;
+					return (
+						<a
+							href={option.href}
+							class:list={[
+								"block rounded-sm px-2 py-1.5 text-sm transition-colors hover:bg-accent hover:text-accent-foreground",
+								isCurrent && "font-semibold text-foreground",
+							]}
+						>
+							{option.label}
+						</a>
+					);
+				})
+			}
+		</div>
+	</details>
+</div>

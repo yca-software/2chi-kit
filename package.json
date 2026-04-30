@@ -15,5 +15,8 @@
   "packageManager": "pnpm@10.33.2",
   "engines": {
     "node": ">=18"
+  },
+  "dependencies": {
+    "@yca-software/design-system": "link:../../../../Library/pnpm/global/5/node_modules/@yca-software/design-system"
   }
 }

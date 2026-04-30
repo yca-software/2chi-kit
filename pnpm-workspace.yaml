@@ -1,3 +1,5 @@
 packages:
   - "apps/*"
   - "packages/*"
+overrides:
+  '@yca-software/design-system': link:../../../../Library/pnpm/global/5/node_modules/@yca-software/design-system
