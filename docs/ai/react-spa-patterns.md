@@ -6,7 +6,7 @@ Vite + React 19 + TypeScript SPA: TanStack Query, Zustand, react-router, i18next
 
 ## Folder structure (canonical)
 
-Under `apps/template/react-spa` or `apps/<slug>/react-spa`:
+Under `apps/react-spa`:
 
 - `src/routes/` — `Root.tsx`, `public/`, `private/`, `admin/` route trees and layouts.
 - `src/api/` — hooks and fetchers (use existing `useAPIFetchWrapper` patterns).
@@ -21,14 +21,13 @@ Under `apps/template/react-spa` or `apps/<slug>/react-spa`:
 
 ## Canonical example files
 
-- **Settings feature with DS + table patterns:** `apps/template/react-spa/src/routes/private/Settings/AuditLog/index.tsx`
-- **Design-system shell:** `apps/template/react-spa/src/main.tsx` (`ThemeProvider`, `TooltipProvider`)
-- **Package scripts:** `apps/template/react-spa/package.json` — `lint` (Biome), `test` (Vitest), `build` (`tsc && vite build`)
+- **Settings feature with DS + table patterns:** `apps/react-spa/src/routes/private/Settings/AuditLog/index.tsx`
+- **Design-system shell:** `apps/react-spa/src/main.tsx` (`ThemeProvider`, `TooltipProvider`)
+- **Package scripts:** `apps/react-spa/package.json` — `lint` (Biome), `test` (Vitest), `build` (`tsc && vite build`)
 
 ## Dependency note
 
-- Template uses `"@yca-software/design-system": "link:../../../packages/design-system"`.
-- Real app copy: `apps/aura/react-spa/package.json` mirrors the same pattern.
+- `apps/react-spa/package.json` uses published semver for `"@yca-software/design-system"`.
 
 ## Patterns to follow
 
@@ -44,7 +43,7 @@ Under `apps/template/react-spa` or `apps/<slug>/react-spa`:
 ## Validation
 
 ```bash
-cd apps/template/react-spa   # or apps/<slug>/react-spa
+cd apps/react-spa
 pnpm lint
 pnpm test
 pnpm build

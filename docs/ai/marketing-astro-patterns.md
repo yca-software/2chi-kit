@@ -6,7 +6,7 @@ Static-first marketing site: Astro 5, React islands, Tailwind v4, `@yca-software
 
 ## Folder structure (canonical)
 
-Under `apps/template/marketing` or `apps/<slug>/marketing`:
+Under `apps/astro`:
 
 - `src/pages/` — Astro pages (e.g. `index.astro`).
 - `src/layouts/` — e.g. `BaseLayout.astro`.
@@ -16,15 +16,13 @@ Under `apps/template/marketing` or `apps/<slug>/marketing`:
 
 ## Canonical example files
 
-- **Home page using DS marketing exports:** `apps/template/marketing/src/pages/index.astro`
-- **SEO wrapper:** `apps/template/marketing/src/components/SeoHead.astro`
-- **Scripts:** `apps/template/marketing/package.json` — `build`: `astro check && astro build`, `lint`: Biome
+- **Home page using DS marketing exports:** `apps/astro/src/pages/index.astro`
+- **SEO wrapper:** `apps/astro/src/components/SeoHead.astro`
+- **Scripts:** `apps/astro/package.json` — `build`: `astro check && astro build`, `lint`: Biome
 
 ## Dependency note
 
-- Template `package.json` uses `"@yca-software/design-system": "^0.1.1"` (npm semver), while `react-spa` in the same monorepo typically uses `link:../../../packages/design-system`. When debugging version skew, check **which app** you are in.
-
-- **Production-style app:** `apps/yca-marketing/package.json` uses a narrower Biome `lint` glob set — follow the **package you are editing**, not an abstract default.
+- `apps/astro/package.json` and `apps/react-spa/package.json` both use published semver for `"@yca-software/design-system"`.
 
 ## Patterns to follow
 
@@ -40,12 +38,12 @@ Under `apps/template/marketing` or `apps/<slug>/marketing`:
 ## Validation
 
 ```bash
-cd apps/template/marketing   # or apps/<slug>/marketing
+cd apps/astro
 pnpm lint
 pnpm build
 ```
 
 ## Common AI mistakes
 
-- Assuming the same Biome scope as `apps/yca-marketing` when editing `apps/template/marketing` (scripts differ).
+- Assuming another repository's Astro/Biome scripts apply here without checking `apps/astro/package.json`.
 - Breaking `@source` path depth when renaming `apps/` segments (Tailwind v4).

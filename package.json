@@ -17,6 +17,6 @@
     "node": ">=18"
   },
   "dependencies": {
-    "@yca-software/design-system": "link:../../../../Library/pnpm/global/5/node_modules/@yca-software/design-system"
+    "@yca-software/design-system": "^0.2.5"
   }
 }
