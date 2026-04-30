@@ -1,0 +1,89 @@
+{
+  "title": "Choose your plan",
+  "subtitle": "Select a plan that fits your needs. You can change it later.",
+  "trialBadge": "{{days}}-day free trial",
+  "perMonth": "/month",
+  "perYear": "/year",
+  "billedAnnually": "billed annually",
+  "annualDiscount": "Save {{percent}}%",
+  "annualBenefit": "Save {{percent}}% — best value when you pay annually",
+  "annualBilling": "Annual",
+  "monthlyBilling": "Monthly",
+  "contactUs": "Contact us",
+  "free": "No active plan",
+  "continueWithFree": "Continue without a subscription",
+  "selectPlan": "Select plan",
+  "currentPlan": "Current plan",
+  "upgradePlan": "Upgrade",
+  "downgradePlan": "Downgrade",
+  "downgradeNotAvailable": "Not available",
+  "changeToAnnual": "Change to annual",
+  "changeToMonthly": "Change to monthly",
+  "planChangeEffectiveNow": "Your plan has been updated.",
+  "planChangeNextBillingPeriod": "Your plan will change at the end of your current billing period.",
+  "confirmPlanChangeTitle": "Change subscription plan?",
+  "confirmPlanChangeDescImmediate": "You're changing from {{currentPlan}} to {{newPlan}}. This change will take effect immediately.",
+  "confirmPlanChangeDescNextBilling": "You're changing from {{currentPlan}} to {{newPlan}}. This change will take effect at the end of your current billing period ({{date}}). You'll keep your current plan until then.",
+  "confirmPlanChangeConfirm": "Confirm change",
+  "keyFeatures": "Key features",
+  "plans": {
+    "free": {
+      "name": "No active plan",
+      "description": "No subscription is active"
+    },
+    "basic": {
+      "name": "Basic",
+      "description": "For small teams getting started"
+    },
+    "pro": {
+      "name": "Pro",
+      "description": "For growing teams that need more"
+    },
+    "enterprise": {
+      "name": "Enterprise",
+      "description": "Custom solutions and dedicated support"
+    }
+  },
+  "features": {
+    "teamMembers": "Team members",
+    "teamMembersFree": "1 team member",
+    "teamMembersBasic": "Up to 3 team members",
+    "teamMembersPro": "Up to 10 team members",
+    "teamMembersEnterprise": "Unlimited team members",
+    "apiAccess": "Programmatic API access",
+    "rolesTeams": "Custom roles & teams",
+    "teamMemberCount": "Team member count",
+    "customRoles": "Custom roles",
+    "teams": "Teams",
+    "apiKeys": "API keys",
+    "auditLogRetention": "Audit log retention",
+    "count3": "3",
+    "count10": "10",
+    "countUnlimited": "Unlimited",
+    "retention90": "90 days",
+    "retention365": "365 days",
+    "retentionUnlimited": "Unlimited",
+    "auditLogFree": "Audit log (30 days)",
+    "auditLogBasic": "Audit log (90 days)",
+    "auditLogPro": "Audit log (365 days)",
+    "auditLogEnterprise": "Audit log (unlimited retention)",
+    "support": "Priority support",
+    "sla": "SLA guarantee (99.9% uptime)",
+    "slaShort": "SLA guarantee"
+  },
+  "enterpriseForm": {
+    "title": "Contact us for Enterprise",
+    "description": "We'll get in touch to discuss your needs and pricing.",
+    "messageLabel": "Message",
+    "messagePlaceholder": "Tell us about your needs...",
+    "messageRequired": "Message is required",
+    "submitButton": "Send",
+    "successMessage": "Thanks! We'll be in touch soon."
+  },
+  "inviteStep": {
+    "title": "Invite your team",
+    "description": "Add team members to your organization. You can skip and do this later from Settings.",
+    "skipForNow": "Skip for now",
+    "inviteButton": "Invite member"
+  }
+}

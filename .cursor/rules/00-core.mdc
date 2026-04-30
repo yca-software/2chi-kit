@@ -1,0 +1,11 @@
+---
+description: Core agent behavior for 2chi-kit — scope, patterns, validation
+alwaysApply: true
+---
+
+# Core
+
+- **Source of truth:** `docs/ai/` for architecture; step-by-step detail in `docs/ai/skills/`. **Auto-selected workflows:** project Agent Skills under `.cursor/skills/*/SKILL.md` (read the skill whose description matches the task).
+- **Before coding:** locate the closest existing feature (same stack, same folder family). Copy its structure; do not invent layers or folders.
+- **Scope:** smallest change that satisfies the request. No drive-by refactors, no new architecture unless an existing pattern already does it.
+- **Finish:** run the real validation commands for every touched workspace (see `docs/ai/monorepo-overview.md`). Fix failures before stopping.

@@ -1,0 +1,15 @@
+---
+description: Agent instructions for scaffolding and extending Astro marketing apps
+globs: apps/**/marketing/**
+alwaysApply: false
+---
+
+# Marketing (Astro) Agent Guidelines
+
+- Treat `apps/template/marketing` as the source template for landing/blog sites.
+- Keep output static-first and SEO-friendly; default to Astro pages and content collections.
+- Reuse `@yca-software/design-system` marketing components before creating app-local variants.
+- Keep content authoring in `src/content/blog/*.md` with frontmatter (`title`, `summary`, `publishedAt`, `tags`, `draft`).
+- Keep metadata centralized via `src/components/SeoHead.astro` and apply canonical URLs.
+- Keep app-specific identity changes minimal and consistent (name, copy, contact info, env values).
+- If adding env vars, update `.env.example` and template docs in the same change.

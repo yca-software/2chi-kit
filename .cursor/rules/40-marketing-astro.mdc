@@ -1,0 +1,16 @@
+---
+description: Astro marketing site conventions
+globs:
+  - "**/marketing/**/*.astro"
+  - "**/marketing/**/*.ts"
+  - "**/marketing/**/*.mjs"
+  - "**/marketing/package.json"
+alwaysApply: false
+---
+
+# Marketing (Astro)
+
+- **Canonical:** `apps/template/marketing` or `apps/<slug>/marketing`.
+- **Structure:** `src/pages/*.astro`, `src/layouts/`, `src/components/`, SEO via `src/components/SeoHead.astro`, blog content under `src/content/blog/` when used.
+- **Design system:** import `@yca-software/design-system` and `@yca-software/design-system/styles.css`; Tailwind `@source` may reference `packages/design-system` — keep paths valid after moves.
+- **Validate:** `pnpm lint`, `pnpm build` (runs `astro check && astro build`) in the marketing package.

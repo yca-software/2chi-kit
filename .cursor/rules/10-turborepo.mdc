@@ -1,0 +1,12 @@
+---
+description: Turborepo and pnpm workspace boundaries
+globs: pnpm-workspace.yaml,turbo.json
+alwaysApply: false
+---
+
+# Turborepo
+
+- **Workspace:** `pnpm-workspace.yaml` — `apps/*`, `packages/*`, `tools/*`.
+- **Root scripts:** `pnpm build`, `pnpm dev`, `pnpm lint`, `pnpm check-types` → `turbo run …`. Prefer **package-scoped** commands when only one app/package changed.
+- **Tasks:** `turbo.json` defines `build`, `lint`, `check-types`, `dev`. If a workspace has no script for a task, turbo skips it — verify locally.
+- **Go:** not orchestrated by turbo; use `make` / `go` in each `go-api` directory.

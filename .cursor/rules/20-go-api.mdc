@@ -1,0 +1,16 @@
+---
+description: Go API template and app conventions
+globs:
+  - "**/go-api/**/*.go"
+  - "**/go-api/Makefile"
+  - "**/go-api/migrations/**/*.sql"
+alwaysApply: false
+---
+
+# Go API
+
+- **Canonical tree:** `apps/template/go-api` (or `apps/<slug>/go-api`). Handlers `internals/transport/http/handlers/<domain>/`, services `internals/services/<domain>/`, repos `internals/repositories/<domain>/`.
+- **Shared lib:** `github.com/yca-software/go-common` via `replace` in app `go.mod` → `../../../packages/go-common`.
+- **Wiring:** new domains → `repositories.go`, `internals/services/services.go`, `internals/transport/http/gateway.go`, and Swagger on handlers.
+- **Schema:** SQL only in `migrations/`. **Docs:** `make swagger` updates `docs/swagger.json` / `docs/swagger.yaml`.
+- **Validate:** from API dir: `make test`; after repo/migration changes: `make test-integration`. See `Makefile` targets.

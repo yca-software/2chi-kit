@@ -1,0 +1,14 @@
+---
+description: Vite + React SPA template conventions
+globs:
+  - "**/react-spa/**/*.{ts,tsx}"
+  - "**/react-spa/package.json"
+alwaysApply: false
+---
+
+# React SPA
+
+- **Canonical:** `apps/template/react-spa` or `apps/<slug>/react-spa`.
+- **Layers:** routes `src/routes/`, API `src/api/`, state `src/states/`, types `src/types/`, i18n `src/locales/`, query keys `src/constants/queryKeys.ts`, helpers `src/helpers/`.
+- **UI:** prefer `@yca-software/design-system` (workspace `link:../../../packages/design-system` in template). Tailwind content includes `packages/design-system` paths — keep in sync when changing layout.
+- **Validate:** `pnpm lint`, `pnpm test`, `pnpm build` in the SPA package directory.

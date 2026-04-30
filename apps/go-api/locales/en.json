@@ -1,0 +1,110 @@
+{
+  "email": {
+    "invitation": {
+      "subject": "You're invited to join {{.OrganizationName}}",
+      "title": "You're Invited!",
+      "greeting": "Hello,",
+      "content": "You have been invited to join an organization. Click the button below to accept the invitation and get started.",
+      "button": "Accept Invitation",
+      "footer": {
+        "ignore": "If you didn't expect this invitation, you can ignore this email.",
+        "expiry": "This link will expire in {{.TokenTTLDays}} days."
+      }
+    },
+    "reset": {
+      "subject": "Reset Password",
+      "title": "Reset Your Password",
+      "greeting": "Hello,",
+      "content": "You recently requested to reset your password. Click the button below to reset it.",
+      "warning": "This password reset link is only valid for the next hour.",
+      "button": "Reset Password",
+      "footer": {
+        "ignore": "If you didn't request a password reset, please ignore this email and your password will remain unchanged.",
+        "link": "If the button doesn't work, copy and paste this link into your browser:"
+      }
+    },
+    "verification": {
+      "subject": "Verify Your Email",
+      "title": "Verify Your Email",
+      "greeting": "Hello,",
+      "content": "Thank you for signing up! Please verify your email address by clicking the button below.",
+      "warning": "This verification link is only valid for the next 24 hours.",
+      "button": "Verify Email",
+      "footer": {
+        "ignore": "If you didn't create an account, please ignore this email.",
+        "link": "If the button doesn't work, copy and paste this link into your browser:"
+      }
+    }
+  },
+  "error": {
+    "500": {
+      "INTERNAL_SERVER_ERROR": "Something went wrong. Please try again in a moment, or contact support if the issue persists.",
+      "LOCATION_SEARCH_PROCESSING_ERROR": "An error occurred while processing the location search."
+    },
+    "422": {
+      "UNPROCESSABLE_ENTITY": "The request contains missing or invalid information. Please review and try again.",
+      "INVALID_API_KEY_PERMISSION": "Invalid API key permission.",
+      "INVITATION_REVOKED": "This invitation has been revoked.",
+      "INVITATION_EXPIRED": "This invitation has expired.",
+      "INVITATION_ALREADY_ACCEPTED": "This invitation has already been accepted.",
+      "INVALID_INVITATION_TOKEN": "This invitation link is invalid.",
+      "USER_ALREADY_MEMBER": "This user is already a member.",
+      "MISSING_PADDLE_CUSTOMER_ID": "Missing Paddle customer ID.",
+      "MISSING_PADDLE_SUBSCRIPTION_ID": "Missing Paddle subscription ID.",
+      "SUBSCRIPTION_CHANGE_FAILED": "We couldn't change your plan. Please try again or use the billing portal to manage your subscription.",
+      "DOWNGRADE_NOT_ALLOWED": "Downgrades are not allowed. Cancel your subscription and resubscribe to a lower plan if needed.",
+      "CURRENT_PASSWORD_MISMATCH": "Current password is incorrect."
+    },
+    "409": {
+      "CONFLICT": "The information provided conflicts with existing data. Please review and try again.",
+      "EMAIL_ALREADY_IN_USE": "This email address is already in use.",
+      "EMAIL_ALREADY_VERIFIED": "This email is already verified.",
+      "API_KEY_ALREADY_REVOKED": "This API key has already been revoked.",
+      "RESOURCE_ALREADY_ARCHIVED": "This resource has already been archived.",
+      "RESOURCE_NOT_ARCHIVED": "This resource is not archived.",
+      "PADDLE_CUSTOMER_ALREADY_EXISTS": "This billing email is already in use by another organization. Please use a different email. If this is your email but you believe it's used incorrectly, please contact us.",
+      "ROLE_HAS_MEMBERS": "This role is assigned to organization members and cannot be deleted. Reassign them under Members first. Assigned emails: {{.memberEmailsText}}."
+    },
+    "404": {
+      "NOT_FOUND": "The requested resource could not be found.",
+      "PASSWORD_MISMATCH": "Passwords do not match."
+    },
+    "403": {
+      "FORBIDDEN": "You do not have permission to access this resource.",
+      "FEATURE_NOT_AVAILABLE": "This feature is not available.",
+      "FEATURE_NOT_INCLUDED": "This feature is not included in your current subscription plan.",
+      "ORGANIZATION_SEATS_LIMIT": "Organization seat limit reached. Upgrade your plan to add more members.",
+      "LOCATION_SEARCH_DENIED": "Location search is not allowed.",
+      "USER_CANNOT_REMOVE_OWN_MEMBER": "You cannot remove yourself from the organization.",
+      "USER_CANNOT_UPDATE_OWN_MEMBER": "You cannot change your own role.",
+      "ROLE_LOCKED": "This role cannot be modified.",
+      "INVITATION_EMAIL_MISMATCH": "This invitation can only be used with the email address it was sent to."
+    },
+    "401": {
+      "UNAUTHORIZED": "Please authenticate to continue.",
+      "INVALID_TOKEN": "Invalid or expired token. Please sign in again.",
+      "EXPIRED_TOKEN": "Your session has expired. Please sign in again.",
+      "AUTHORIZATION_HEADER_REQUIRED": "Authorization is required.",
+      "INVALID_API_KEY": "Invalid or revoked API key.",
+      "INVALID_VERIFICATION_TOKEN": "This verification link is invalid or has already been used.",
+      "EXPIRED_VERIFICATION_TOKEN": "This verification link has expired. Please request a new one.",
+      "INVALID_PASSWORD_RESET_TOKEN": "This password reset link is invalid or has already been used.",
+      "EXPIRED_PASSWORD_RESET_TOKEN": "This password reset link has expired. Please request a new one."
+    },
+    "400": {
+      "BAD_REQUEST": "The request contains invalid information. Please review and try again.",
+      "LOCATION_SEARCH_INVALID_QUERY": "The search query is invalid."
+    },
+    "429": {
+      "TOO_MANY_REQUESTS": "Too many requests have been made. Please wait a moment and try again.",
+      "LOCATION_SEARCH_TEMPORARY_ERROR": "Location search is temporarily unavailable. Please try again later."
+    },
+    "402": {
+      "PAYMENT_REQUIRED": "Your subscription has ended or requires an update. Please update your subscription to continue."
+    },
+    "503": {
+      "SERVICE_UNAVAILABLE": "The service is currently unavailable. Please try again later.",
+      "LOCATION_SEARCH_UNAVAILABLE": "Location search service is unavailable."
+    }
+  }
+}

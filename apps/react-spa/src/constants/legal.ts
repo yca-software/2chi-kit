@@ -1,0 +1,3 @@
+export const LEGAL_VERSION = "1.0.0";
+export const LEGAL_EFFECTIVE_DATE = "2025-02-01";
+export const COOKIE_POLICY_EFFECTIVE_DATE = "2025-02-01";

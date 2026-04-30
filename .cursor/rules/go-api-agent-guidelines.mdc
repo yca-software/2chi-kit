@@ -1,0 +1,57 @@
+---
+description: Agent instructions for building and extending go-api services safely
+globs: apps/go-api/**
+alwaysApply: false
+---
+
+# Go API Template Agent Guidelines
+
+- Core architecture rules:
+  - Keep transport logic in `internals/transport/http/**`, domain/business logic in `internals/services/**`, and persistence in `internals/repositories/**`.
+  - Do not put domain decisions in handlers or SQL details in services.
+  - Reuse existing `models`, constants, and shared helpers before creating new abstractions.
+
+- How we implement an HTTP endpoint:
+  - Add/extend a handler under `internals/transport/http/handlers/<domain>/`.
+  - Register the route in that handler's `RegisterEndpoints` with correct private/public middleware usage.
+  - Parse path/query/body in handler (`c.Param`, `c.QueryParam`, `c.Bind`) and pass typed request objects to services.
+  - Return transport responses only in handlers (`c.JSON`, `c.NoContent`); propagate service errors unchanged.
+  - Add/maintain Swagger comments on handler methods (`@Summary`, `@Param`, `@Success`, `@Failure`, `@Router`, `@Security`).
+
+- How we implement service logic:
+  - Define request/response structs in the relevant service package with validation tags.
+  - Validate inputs via `validator.ValidateStruct`.
+  - Enforce auth/permission rules via `accessInfo` checks and authorizer patterns used by existing services.
+  - Orchestrate repository calls and integrations (email, Paddle, Google, etc.) inside services.
+  - Use transactions for multi-write consistency, with safe rollback handling.
+  - Return domain errors using `go-common/error` constructors (forbidden/not found/unprocessable/internal patterns).
+  - Log operational failures with structured logger metadata (`Location`, contextual data).
+
+- How we implement repository changes:
+  - Place repository code under `internals/repositories/<domain>/main.go`.
+  - Extend the repository interface first, then implement methods in the concrete repository.
+  - Use shared base repository methods (`BaseCreate`, `BaseUpdate`, `BaseDelete`, `BaseSelect`, `BasePaginatedSelect`) and `squirrel` conditions.
+  - Respect soft-delete behavior (`deleted_at`) and existing query ordering/filter conventions.
+  - Keep transaction-aware signatures (`tx yca_repository.Tx`) for writes that may be part of service transactions.
+
+- How we wire new parts into the app:
+  - Add repository construction in `internals/repositories/repositories.go` when introducing a new repository.
+  - Register service dependencies in `internals/services/services.go` through the `Dependencies` struct pattern.
+  - Register new handlers in `internals/transport/http/gateway.go`.
+  - Keep `cmd/api/app.go` bootstrap sequence intact (`repositories` -> `services` -> gateway registration).
+
+- How we handle async jobs and cron:
+  - Add producer/consumer logic under `internals/jobs/**` and scheduling under `internals/cron/**`.
+  - Reuse existing retry/dead-letter conventions and queue naming patterns.
+  - Keep queue/DLQ names aligned with the monorepo `Makefile` RabbitMQ topology target (`infra-rabbitmq-jobs-topology`).
+
+- How we handle schema and API docs:
+  - Add schema changes via SQL migrations in `migrations/` (no ad-hoc runtime schema edits).
+  - Regenerate Swagger docs with `make swagger` whenever routes, request/response shapes, or tags change.
+  - Keep docs artifacts (`docs/swagger.yaml`, `docs/swagger.json`) committed and consistent with handlers.
+
+- Testing and validation checklist:
+  - Add or update tests next to changed code (`main_test.go` and focused method tests in same package).
+  - Run `make test` for general coverage.
+  - Run `make test-integration` when repository/database behavior changes.
+  - If infra assumptions change (Postgres/Redis/RabbitMQ/monitoring), update docs and Makefile targets in the same change.

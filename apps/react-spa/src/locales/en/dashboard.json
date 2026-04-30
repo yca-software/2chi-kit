@@ -1,0 +1,42 @@
+{
+  "title": "Dashboard",
+  "description": "Welcome to your dashboard",
+  "welcomeToOrg": "Welcome to {{orgName}}",
+  "gettingStarted": {
+    "title": "Getting Started",
+    "description": "Start building your application",
+    "content": "This is your dashboard. You can customize this page to show relevant information for your organization."
+  },
+  "onboarding": {
+    "title": "Create Your First Organization",
+    "description": "Get started by creating your first organization",
+    "createOrgTitle": "Create Organization",
+    "createOrgDescription": "Add a new organization to your account.",
+    "instructions": "You need to create an organization to continue. Click the button below to get started.",
+    "step1Title": "Create organization",
+    "step2Title": "Invite users",
+    "stepPricingTitle": "Choose your plan",
+    "continueToDashboard": "Continue to dashboard"
+  },
+  "onboardingForm": {
+    "title": "Create Your Organization",
+    "description": "Get started by creating your first organization. You can always create more later.",
+    "orgNameLabel": "Organization Name",
+    "orgNamePlaceholder": "Enter your organization name",
+    "locationLabel": "Organization address",
+    "locationDescription": "Used for billing when you add a paid plan.",
+    "locationPlaceholder": "Search for an address...",
+    "billingEmailLabel": "Billing email",
+    "billingEmailDescription": "Invoices and receipts will be sent here when you add a paid plan.",
+    "billingEmailDescriptionCreate": "Each organization must use a different billing email. Invoices will be sent here.",
+    "billingEmailPlaceholder": "billing@company.com",
+    "createButton": "Create Organization",
+    "validation": {
+      "nameRequired": "Organization name is required",
+      "locationRequired": "Please select a location",
+      "billingEmailRequired": "Billing email is required",
+      "billingEmailInvalid": "Please enter a valid email address",
+      "billingEmailAlreadyUsed": "An organization is already using this billing email. Please use another one."
+    }
+  }
+}

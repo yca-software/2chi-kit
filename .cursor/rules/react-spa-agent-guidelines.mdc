@@ -1,0 +1,62 @@
+---
+description: Agent instructions for scaffolding and extending React SPA template apps
+globs: apps/**/react-spa/**
+alwaysApply: false
+---
+
+# React SPA Agent Guidelines
+
+- Purpose and scope:
+  - Treat `apps/template/react-spa` as the source template for React + Vite + TypeScript SPA scaffolding.
+  - Keep changes incremental, DRY, and aligned with existing folder/module patterns.
+  - Prefer extending existing features and shared utilities over adding parallel abstractions.
+
+- Scaffolding expectations:
+  - Copy full template structure first, then apply minimal app-specific changes.
+  - Update app identity consistently (package name, app title, env values, branding text).
+  - Keep runtime contracts intact, especially required `VITE_*` env variables.
+  - Ensure no template placeholders remain in copied projects.
+
+- Project conventions:
+  - Keep routes UI-focused; place data logic in API hooks and shared helpers.
+  - Keep API access inside `src/api/*` via `useAPIFetchWrapper`.
+  - Keep query keys centralized in `src/constants/queryKeys.ts`.
+  - Keep shared app state in `src/states/*` (Zustand).
+  - Keep user-facing copy in `src/locales/*`.
+  - Prefer `@yca-software/design-system` components before creating local duplicates.
+
+- Folder ownership:
+  - `src/routes/*`: route pages, layouts, and guards.
+  - `src/api/*`: endpoint hooks and API calls.
+  - `src/components/*`: reusable app-specific UI.
+  - `src/helpers/*`: fetch wrapper, auth helpers, shared utilities.
+  - `src/states/*`: global/shared state stores.
+  - `src/constants/*`: env keys, permissions, query keys, app constants.
+  - `src/types/*`: request/response and domain types.
+  - `src/locales/*`: i18n namespaces and translations.
+
+- Feature workflow (recommended order):
+  - Define/update types in `src/types`.
+  - Add/extend query keys when needed.
+  - Implement query/mutation hooks in `src/api`.
+  - Build/update route/component UI using those hooks.
+  - Add i18n keys in `src/locales`.
+  - Add/update tests (unit and e2e where relevant).
+
+- Auth and permissions:
+  - Keep JWT cookie/token assumptions compatible with existing helpers.
+  - Reuse existing private/admin guard patterns.
+  - Do not bypass permission checks in private/admin route trees.
+
+- Environment contracts:
+  - Required: `VITE_API_URL`, `VITE_APP_NAME`.
+  - Optional auth: `VITE_OAUTH_GOOGLE_CLIENT_ID`.
+  - Optional cookies: `VITE_APP_COOKIE_DOMAIN`.
+  - Optional subscriptions: `VITE_PADDLE_ENVIRONMENT`, `VITE_PADDLE_CLIENT_TOKEN`, `VITE_PADDLE_PRICE_*`.
+  - Optional analytics: `VITE_PUBLIC_POSTHOG_KEY`, `VITE_PUBLIC_POSTHOG_HOST`.
+  - When adding env vars, update `.env.example` and docs in the same change.
+
+- Validation and done criteria:
+  - Run `pnpm lint`, `pnpm test`, and `pnpm build` before considering feature work done.
+  - Ensure query invalidation behavior matches changed mutations.
+  - Keep docs updated when setup/workflow/behavior changes.

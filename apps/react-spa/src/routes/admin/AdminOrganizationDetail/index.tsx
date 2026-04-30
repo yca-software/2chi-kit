@@ -1,0 +1,199 @@
+import { useState } from "react";
+import { useParams } from "react-router";
+import { Helmet } from "react-helmet-async";
+import { useTranslationNamespace } from "@/helpers";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+  Button,
+  ConfirmDialog,
+} from "@yca-software/design-system";
+import { Building2, Pencil, Archive } from "lucide-react";
+import {
+  ADMIN_SUBSCRIPTION_TYPE_BASIC,
+  ADMIN_SUBSCRIPTION_TYPE_PRO,
+  ADMIN_SUBSCRIPTION_TYPE_ENTERPRISE,
+  useAdminArchiveOrganizationMutation,
+  useAdminOrganizationDetailQuery,
+} from "@/api";
+import { useNavigate } from "react-router";
+import { AdminDetailPage } from "../AdminDetailPage";
+import { DetailFieldList } from "../DetailFieldList";
+import { AdminEditSubscriptionDialog } from "./AdminEditSubscriptionDialog";
+
+function formatDate(iso: string) {
+  return new Date(iso).toLocaleString(undefined, {
+    dateStyle: "medium",
+  });
+}
+
+function subscriptionTypeLabel(
+  type: number,
+  t: (key: string) => string,
+): string {
+  switch (type) {
+    case 0:
+      return t("admin:organizations.subscriptionTypeFree");
+    case ADMIN_SUBSCRIPTION_TYPE_BASIC:
+      return t("admin:organizations.subscriptionTypeBasic");
+    case ADMIN_SUBSCRIPTION_TYPE_PRO:
+      return t("admin:organizations.subscriptionTypePro");
+    case ADMIN_SUBSCRIPTION_TYPE_ENTERPRISE:
+      return t("admin:organizations.subscriptionTypeEnterprise");
+    default:
+      return String(type);
+  }
+}
+
+export function AdminOrganizationDetail() {
+  const { t } = useTranslationNamespace(["admin"]);
+  const navigate = useNavigate();
+  const { orgId } = useParams<{ orgId: string }>();
+  const { data, isLoading, isError, refetch } =
+    useAdminOrganizationDetailQuery(orgId);
+  const [editSubscriptionOpen, setEditSubscriptionOpen] = useState(false);
+  const [archiveDialogOpen, setArchiveDialogOpen] = useState(false);
+  const archiveMutation = useAdminArchiveOrganizationMutation({
+    onSuccess: () => {
+      navigate("/admin/organizations");
+    },
+  });
+
+  if (!data && !isLoading && !isError) return null;
+
+  return (
+    <>
+      {data && (
+        <Helmet>
+          <title>
+            {data.name} – {t("admin:organizations.details")}
+          </title>
+        </Helmet>
+      )}
+      <AdminDetailPage
+        backHref="/admin/organizations"
+        backLabel={t("admin:organizations.backToList")}
+        isLoading={isLoading || !orgId}
+        isError={!!isError || (!isLoading && !!orgId && !data)}
+        notFoundMessage={t("admin:organizations.notFound")}
+        headerActions={
+          data ? (
+            <div className="flex items-center gap-2">
+              {data.customSubscription && (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setEditSubscriptionOpen(true)}
+                  aria-label={t("admin:organizations.editSubscription.title")}
+                >
+                  <Pencil className="mr-2 h-4 w-4" aria-hidden />
+                  {t("admin:organizations.editSubscription.button")}
+                </Button>
+              )}
+              <Button
+                variant="destructive"
+                size="sm"
+                onClick={() => setArchiveDialogOpen(true)}
+                aria-label={t("admin:organizations.archive.button")}
+              >
+                <Archive className="mr-2 h-4 w-4" aria-hidden />
+                {t("admin:organizations.archive.button")}
+              </Button>
+            </div>
+          ) : undefined
+        }
+      >
+        {data && (
+          <>
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Building2 className="h-5 w-5" aria-hidden />
+                  {t("admin:organizations.details")}
+                </CardTitle>
+                <CardDescription>{data.name}</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <DetailFieldList
+                  fields={[
+                    {
+                      label: t("admin:organizations.name"),
+                      value: data.name,
+                    },
+                    {
+                      label: t("admin:organizations.created"),
+                      value: formatDate(data.createdAt),
+                    },
+                    {
+                      label: t("admin:organizations.billingEmail"),
+                      value: data.billingEmail,
+                      span: 2,
+                    },
+                    {
+                      label: t("admin:organizations.address"),
+                      value:
+                        [data.address, data.city, data.zip, data.country]
+                          .filter(Boolean)
+                          .join(", ") || "—",
+                      span: 2,
+                    },
+                    {
+                      label: t("admin:organizations.customSubscription"),
+                      value: data.customSubscription
+                        ? t("admin:organizations.yes")
+                        : t("admin:organizations.no"),
+                    },
+                    {
+                      label: t("admin:organizations.subscriptionType"),
+                      value: subscriptionTypeLabel(data.subscriptionType, t),
+                    },
+                    {
+                      label: t("admin:organizations.subscriptionSeats"),
+                      value: String(data.subscriptionSeats),
+                    },
+                    ...(data.subscriptionExpiresAt
+                      ? [
+                          {
+                            label: t("admin:organizations.subscriptionExpires"),
+                            value: formatDate(data.subscriptionExpiresAt),
+                          },
+                        ]
+                      : []),
+                  ]}
+                />
+              </CardContent>
+            </Card>
+            <AdminEditSubscriptionDialog
+              open={editSubscriptionOpen}
+              onOpenChange={setEditSubscriptionOpen}
+              organization={data}
+              onSuccess={() => refetch()}
+            />
+            <ConfirmDialog
+              open={archiveDialogOpen}
+              onOpenChange={setArchiveDialogOpen}
+              title={t("common:confirm")}
+              description={t("admin:organizations.archive.confirmDescription")}
+              cancelLabel={t("common:cancel")}
+              confirmLabel={
+                archiveMutation.isPending
+                  ? t("common:archiving")
+                  : t("common:archive")
+              }
+              variant="destructive"
+              isPending={archiveMutation.isPending}
+              onConfirm={() => {
+                if (!orgId) return;
+                archiveMutation.mutate(orgId);
+              }}
+              closeOnOutsideClick
+            />
+          </>
+        )}
+      </AdminDetailPage>
+    </>
+  );
+}
