@@ -82,17 +82,14 @@ func (a *Authorizer) CheckOrganizationPermissionWithSubscription(accessInfo *mod
 		return yca_error.NewForbiddenError(nil, constants.FEATURE_NOT_INCLUDED_CODE, nil)
 	}
 
-	// Subscription expiry must be set (by pricing step trial or Paddle). Enterprise/custom may have nil.
-	// Past due: allow access for SUBSCRIPTION_PAST_DUE_GRACE_DAYS after expiry; after that return PAYMENT_REQUIRED.
-	if organization.SubscriptionType != constants.SUBSCRIPTION_TYPE_ENTERPRISE && !organization.CustomSubscription {
-		if organization.SubscriptionExpiresAt == nil {
+	if !organization.CustomSubscription && organization.SubscriptionExpiresAt == nil {
+		return yca_error.NewPaymentRequiredError(nil, constants.PAYMENT_REQUIRED_CODE, nil)
+	}
+
+	now := a.now()
+	if organization.SubscriptionExpiresAt.Before(now) {
+		if now.Sub(*organization.SubscriptionExpiresAt) > PastDueGraceDuration {
 			return yca_error.NewPaymentRequiredError(nil, constants.PAYMENT_REQUIRED_CODE, nil)
-		}
-		now := a.now()
-		if organization.SubscriptionExpiresAt.Before(now) {
-			if now.Sub(*organization.SubscriptionExpiresAt) > PastDueGraceDuration {
-				return yca_error.NewPaymentRequiredError(nil, constants.PAYMENT_REQUIRED_CODE, nil)
-			}
 		}
 	}
 

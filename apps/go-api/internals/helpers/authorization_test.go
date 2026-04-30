@@ -274,6 +274,88 @@ func (s *AuthorizationTestSuite) TestCheckOrganizationPermissionWithSubscription
 	}
 }
 
+func (s *AuthorizationTestSuite) TestCheckOrganizationPermissionWithSubscription_FreePlan() {
+	orgID := uuid.New()
+	futureTime := s.now.Add(24 * time.Hour)
+	organization := &models.Organization{
+		ID:                    orgID,
+		SubscriptionType:      constants.SUBSCRIPTION_TYPE_FREE,
+		SubscriptionExpiresAt: &futureTime,
+	}
+
+	accessInfo := &models.AccessInfo{
+		User: &models.UserAccessInfo{
+			UserID: uuid.New(),
+			Roles: []models.JWTAccessTokenPermissionData{
+				{
+					OrganizationID: orgID,
+					RoleID:         uuid.New(),
+					Permissions:    models.RolePermissions{constants.PERMISSION_ORG_READ},
+				},
+			},
+		},
+	}
+
+	err := s.authorizer.CheckOrganizationPermissionWithSubscription(accessInfo, organization, constants.PERMISSION_ORG_READ)
+	s.Error(err)
+	if e, ok := err.(*yca_error.Error); ok {
+		s.Equal(constants.FEATURE_NOT_INCLUDED_CODE, e.ErrorCode)
+	}
+}
+
+func (s *AuthorizationTestSuite) TestCheckOrganizationPermissionWithSubscription_NoExpiryAndNoCustomSubscription() {
+	orgID := uuid.New()
+	organization := &models.Organization{
+		ID:               orgID,
+		SubscriptionType: constants.SUBSCRIPTION_TYPE_BASIC,
+	}
+
+	accessInfo := &models.AccessInfo{
+		User: &models.UserAccessInfo{
+			UserID: uuid.New(),
+			Roles: []models.JWTAccessTokenPermissionData{
+				{
+					OrganizationID: orgID,
+					RoleID:         uuid.New(),
+					Permissions:    models.RolePermissions{constants.PERMISSION_ORG_READ},
+				},
+			},
+		},
+	}
+
+	err := s.authorizer.CheckOrganizationPermissionWithSubscription(accessInfo, organization, constants.PERMISSION_ORG_READ)
+	s.Error(err)
+	if e, ok := err.(*yca_error.Error); ok {
+		s.Equal(constants.PAYMENT_REQUIRED_CODE, e.ErrorCode)
+	}
+}
+
+func (s *AuthorizationTestSuite) TestCheckOrganizationPermissionWithSubscription_CustomSubscriptionWithoutExpiry() {
+	orgID := uuid.New()
+	organization := &models.Organization{
+		ID:                 orgID,
+		SubscriptionType:   constants.SUBSCRIPTION_TYPE_BASIC,
+		CustomSubscription: true,
+	}
+
+	accessInfo := &models.AccessInfo{
+		User: &models.UserAccessInfo{
+			UserID: uuid.New(),
+			Roles: []models.JWTAccessTokenPermissionData{
+				{
+					OrganizationID: orgID,
+					RoleID:         uuid.New(),
+					Permissions:    models.RolePermissions{constants.PERMISSION_ORG_READ},
+				},
+			},
+		},
+	}
+
+	s.Panics(func() {
+		_ = s.authorizer.CheckOrganizationPermissionWithSubscription(accessInfo, organization, constants.PERMISSION_ORG_READ)
+	})
+}
+
 func (s *AuthorizationTestSuite) TestCheckOrganizationFeature_Admin_SkipsCheck() {
 	org := &models.Organization{
 		ID:               uuid.New(),
