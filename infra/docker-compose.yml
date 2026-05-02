@@ -1,6 +1,6 @@
 services:
   postgres:
-    image: timescale/timescaledb-ha:pg15-latest
+    image: timescale/timescaledb:latest-pg16
     container_name: postgres_timescale_postgis
     ports:
       - "5432:5432"
@@ -9,7 +9,7 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: example
     volumes:
-      - postgres_data:/home/postgres/pgdata/data
+      - postgres_data:/var/lib/postgresql/data
     restart: unless-stopped
 
   redis:
