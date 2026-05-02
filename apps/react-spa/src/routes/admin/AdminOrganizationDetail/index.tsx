@@ -11,7 +11,7 @@ import {
   Button,
   ConfirmDialog,
 } from "@yca-software/design-system";
-import { Building2, Pencil, Archive, RotateCcw } from "lucide-react";
+import { Building2, Pencil, RotateCcw } from "lucide-react";
 import {
   ADMIN_SUBSCRIPTION_TYPE_BASIC,
   ADMIN_SUBSCRIPTION_TYPE_PRO,
@@ -205,25 +205,6 @@ export function AdminOrganizationDetail() {
                 onSuccess={() => refetch()}
               />
             )}
-            <ConfirmDialog
-              open={archiveDialogOpen}
-              onOpenChange={setArchiveDialogOpen}
-              title={t("common:confirm")}
-              description={t("admin:organizations.archive.confirmDescription")}
-              cancelLabel={t("common:cancel")}
-              confirmLabel={
-                archiveMutation.isPending
-                  ? t("common:archiving")
-                  : t("common:archive")
-              }
-              variant="destructive"
-              isPending={archiveMutation.isPending}
-              onConfirm={() => {
-                if (!orgId) return;
-                archiveMutation.mutate(orgId);
-              }}
-              closeOnOutsideClick
-            />
             <ConfirmDialog
               open={restoreDialogOpen}
               onOpenChange={setRestoreDialogOpen}
