@@ -289,30 +289,6 @@ export const useAdminUpdateOrganizationSubscriptionMutation = (
   });
 };
 
-export const useAdminArchiveOrganizationMutation = (
-  callbacks: MutationCallbacks<void> = {},
-) => {
-  const fetchWrapper = useAPI();
-  const queryClient = useQueryClient();
-  return useMutation<void, MutationError, string>({
-    mutationFn: (orgId: string) =>
-      fetchWrapper({
-        endpoint: `organization/${orgId}/archive`,
-        method: "POST",
-      }) as Promise<void>,
-    onSuccess: (_, orgId) => {
-      queryClient.removeQueries({
-        queryKey: [ADMIN_ORGANIZATION_QUERY_KEYS.DETAIL, orgId],
-      });
-      queryClient.invalidateQueries({
-        queryKey: [ADMIN_ORGANIZATION_QUERY_KEYS.ALL],
-      });
-      callbacks.onSuccess?.();
-    },
-    onError: callbacks.onError,
-  });
-};
-
 export const useAdminRestoreOrganizationMutation = (
   callbacks: MutationCallbacks<void> = {},
 ) => {

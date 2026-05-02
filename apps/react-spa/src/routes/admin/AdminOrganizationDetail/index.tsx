@@ -16,7 +16,6 @@ import {
   ADMIN_SUBSCRIPTION_TYPE_BASIC,
   ADMIN_SUBSCRIPTION_TYPE_PRO,
   ADMIN_SUBSCRIPTION_TYPE_ENTERPRISE,
-  useAdminArchiveOrganizationMutation,
   useAdminArchivedOrganizationDetailQuery,
   useAdminOrganizationDetailQuery,
   useAdminRestoreOrganizationMutation,
@@ -71,14 +70,7 @@ export function AdminOrganizationDetail() {
     : activeQuery;
 
   const [editSubscriptionOpen, setEditSubscriptionOpen] = useState(false);
-  const [archiveDialogOpen, setArchiveDialogOpen] = useState(false);
   const [restoreDialogOpen, setRestoreDialogOpen] = useState(false);
-
-  const archiveMutation = useAdminArchiveOrganizationMutation({
-    onSuccess: () => {
-      navigate("/admin/organizations");
-    },
-  });
 
   const restoreMutation = useAdminRestoreOrganizationMutation({
     onSuccess: () => {
@@ -128,7 +120,7 @@ export function AdminOrganizationDetail() {
                   {t("admin:organizations.editSubscription.button")}
                 </Button>
               )}
-              {isArchivedDetail ? (
+              {isArchivedDetail && (
                 <Button
                   variant="default"
                   size="sm"
@@ -137,16 +129,6 @@ export function AdminOrganizationDetail() {
                 >
                   <RotateCcw className="mr-2 h-4 w-4" aria-hidden />
                   {t("admin:organizations.restore.button")}
-                </Button>
-              ) : (
-                <Button
-                  variant="destructive"
-                  size="sm"
-                  onClick={() => setArchiveDialogOpen(true)}
-                  aria-label={t("admin:organizations.archive.button")}
-                >
-                  <Archive className="mr-2 h-4 w-4" aria-hidden />
-                  {t("admin:organizations.archive.button")}
                 </Button>
               )}
             </div>
@@ -246,9 +228,7 @@ export function AdminOrganizationDetail() {
               open={restoreDialogOpen}
               onOpenChange={setRestoreDialogOpen}
               title={t("common:confirm")}
-              description={t(
-                "admin:organizations.restore.confirmDescription",
-              )}
+              description={t("admin:organizations.restore.confirmDescription")}
               cancelLabel={t("common:cancel")}
               confirmLabel={
                 restoreMutation.isPending
