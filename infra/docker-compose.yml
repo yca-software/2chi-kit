@@ -8,6 +8,8 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: example
+    volumes:
+      - postgres_data:/home/postgres/pgdata/data
     restart: unless-stopped
 
   redis:
@@ -73,3 +75,6 @@ services:
       - prometheus
       - loki
     restart: unless-stopped
+
+volumes:
+  postgres_data:
