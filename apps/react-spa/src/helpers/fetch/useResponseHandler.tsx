@@ -5,7 +5,6 @@ import { useRefreshAccessToken } from "./useRefreshAccessToken";
 import { getRequestOptions } from "./request";
 
 export const useResponseHandler = () => {
-  const refreshToken = getRefreshTokenFromCookies();
   const refreshAccessToken = useRefreshAccessToken();
 
   function handleResponse(
@@ -23,6 +22,10 @@ export const useResponseHandler = () => {
       }
 
       if (!response.ok) {
+        // Read cookies at 401 time — a value captured on an earlier render can be
+        // stale right after login, causing us to skip refresh and surface a false
+        // "session expired" for the first private API call.
+        const refreshToken = getRefreshTokenFromCookies();
         if (
           response.status === 401 &&
           refreshToken &&

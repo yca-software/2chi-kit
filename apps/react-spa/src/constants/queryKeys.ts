@@ -34,6 +34,8 @@ export const ADMIN_USER_QUERY_KEYS = {
 
 export const ADMIN_ORGANIZATION_QUERY_KEYS = {
   ALL: "admin-organizations",
+  ALL_ARCHIVED: "admin-organizations-archived",
   DETAIL: "admin-organization",
+  DETAIL_ARCHIVED: "admin-organization-archived",
   AUDIT_LOGS: "admin-organization-audit-logs",
 };

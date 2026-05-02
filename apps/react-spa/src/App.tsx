@@ -106,6 +106,10 @@ export const App = () => {
                     element={<AdminOrganizations />}
                   />
                   <Route
+                    path="organizations/archived/:orgId"
+                    element={<AdminOrganizationDetail />}
+                  />
+                  <Route
                     path="organizations/:orgId"
                     element={<AdminOrganizationDetail />}
                   />

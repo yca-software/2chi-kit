@@ -55,6 +55,8 @@
     "title": "Organization Management",
     "description": "View and manage all organizations on the platform.",
     "allOrganizations": "All Organizations",
+    "filterActive": "Active",
+    "filterArchived": "Archived",
     "searchPlaceholder": "Search by name...",
     "name": "Name",
     "created": "Created",
@@ -125,6 +127,21 @@
     "archive": {
       "button": "Archive",
       "confirmDescription": "This will archive the organization (soft delete) and revoke access for its members."
+    },
+    "archived": {
+      "title": "Archived organizations",
+      "description": "Organizations that have been archived (soft-deleted). Restore an organization to make it active again.",
+      "allArchived": "Archived organizations",
+      "searchPlaceholder": "Search by name...",
+      "noOrganizations": "No archived organizations found.",
+      "backToActiveList": "Active organizations",
+      "backToArchivedList": "Back to archived organizations",
+      "detailsTitle": "Archived organization"
+    },
+    "restore": {
+      "button": "Restore",
+      "restoring": "Restoring…",
+      "confirmDescription": "This will restore the organization so members can access it again."
     }
   }
 }

@@ -35,25 +35,6 @@ export interface AdminUserListResponse {
 
 const USER_PAGE_SIZE = 20;
 
-export const useAdminUserListQuery = (params: AdminUserListParams = {}) => {
-  const fetchWrapper = useAPI();
-  const { search = "", limit = USER_PAGE_SIZE, offset = 0 } = params;
-  return useQuery<AdminUserListResponse>({
-    queryKey: [ADMIN_USER_QUERY_KEYS.ALL, search, limit, offset],
-    queryFn: () => {
-      const searchParams = new URLSearchParams();
-      searchParams.set("limit", String(limit));
-      searchParams.set("offset", String(offset));
-      if (search) searchParams.set("search", search);
-      const qs = searchParams.toString();
-      return fetchWrapper({
-        endpoint: `admin/user?${qs}`,
-        method: "GET",
-      }) as Promise<AdminUserListResponse>;
-    },
-  });
-};
-
 export const useAdminUserListInfiniteQuery = (search: string = "") => {
   const fetchWrapper = useAPI();
   return useInfiniteQuery<AdminUserListResponse>({
@@ -152,27 +133,6 @@ export interface AdminOrganizationListResponse {
 
 const ORG_PAGE_SIZE = 20;
 
-export const useAdminOrganizationListQuery = (
-  params: AdminOrganizationListParams = {},
-) => {
-  const fetchWrapper = useAPI();
-  const { search = "", limit = ORG_PAGE_SIZE, offset = 0 } = params;
-  return useQuery<AdminOrganizationListResponse>({
-    queryKey: [ADMIN_ORGANIZATION_QUERY_KEYS.ALL, search, limit, offset],
-    queryFn: () => {
-      const searchParams = new URLSearchParams();
-      searchParams.set("limit", String(limit));
-      searchParams.set("offset", String(offset));
-      if (search) searchParams.set("search", search);
-      const qs = searchParams.toString();
-      return fetchWrapper({
-        endpoint: `admin/organization?${qs}`,
-        method: "GET",
-      }) as Promise<AdminOrganizationListResponse>;
-    },
-  });
-};
-
 export const useAdminOrganizationListInfiniteQuery = (search: string = "") => {
   const fetchWrapper = useAPI();
   return useInfiniteQuery<AdminOrganizationListResponse>({
@@ -196,6 +156,31 @@ export const useAdminOrganizationListInfiniteQuery = (search: string = "") => {
   });
 };
 
+export const useAdminArchivedOrganizationListInfiniteQuery = (
+  search: string = "",
+) => {
+  const fetchWrapper = useAPI();
+  return useInfiniteQuery<AdminOrganizationListResponse>({
+    queryKey: [ADMIN_ORGANIZATION_QUERY_KEYS.ALL_ARCHIVED, "infinite", search],
+    queryFn: ({ pageParam = 0 }) => {
+      const searchParams = new URLSearchParams();
+      searchParams.set("limit", String(ORG_PAGE_SIZE));
+      searchParams.set("offset", String(pageParam));
+      if (search) searchParams.set("search", search);
+      const qs = searchParams.toString();
+      return fetchWrapper({
+        endpoint: `admin/organization/archived?${qs}`,
+        method: "GET",
+      }) as Promise<AdminOrganizationListResponse>;
+    },
+    initialPageParam: 0,
+    getNextPageParam: (lastPage, allPages) => {
+      if (!lastPage.hasNext) return undefined;
+      return allPages.length * ORG_PAGE_SIZE;
+    },
+  });
+};
+
 export const useAdminOrganizationDetailQuery = (orgId: string | undefined) => {
   const fetchWrapper = useAPI();
   return useQuery<Organization>({
@@ -203,6 +188,21 @@ export const useAdminOrganizationDetailQuery = (orgId: string | undefined) => {
     queryFn: () =>
       fetchWrapper({
         endpoint: `admin/organization/${orgId}`,
+        method: "GET",
+      }) as Promise<Organization>,
+    enabled: !!orgId,
+  });
+};
+
+export const useAdminArchivedOrganizationDetailQuery = (
+  orgId: string | undefined,
+) => {
+  const fetchWrapper = useAPI();
+  return useQuery<Organization>({
+    queryKey: [ADMIN_ORGANIZATION_QUERY_KEYS.DETAIL_ARCHIVED, orgId],
+    queryFn: () =>
+      fetchWrapper({
+        endpoint: `admin/organization/archived/${orgId}`,
         method: "GET",
       }) as Promise<Organization>,
     enabled: !!orgId,
@@ -306,6 +306,33 @@ export const useAdminArchiveOrganizationMutation = (
       });
       queryClient.invalidateQueries({
         queryKey: [ADMIN_ORGANIZATION_QUERY_KEYS.ALL],
+      });
+      callbacks.onSuccess?.();
+    },
+    onError: callbacks.onError,
+  });
+};
+
+export const useAdminRestoreOrganizationMutation = (
+  callbacks: MutationCallbacks<void> = {},
+) => {
+  const fetchWrapper = useAPI();
+  const queryClient = useQueryClient();
+  return useMutation<void, MutationError, string>({
+    mutationFn: (orgId: string) =>
+      fetchWrapper({
+        endpoint: `admin/organization/archived/${orgId}/restore`,
+        method: "POST",
+      }) as Promise<void>,
+    onSuccess: (_, orgId) => {
+      queryClient.removeQueries({
+        queryKey: [ADMIN_ORGANIZATION_QUERY_KEYS.DETAIL_ARCHIVED, orgId],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [ADMIN_ORGANIZATION_QUERY_KEYS.ALL],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [ADMIN_ORGANIZATION_QUERY_KEYS.ALL_ARCHIVED],
       });
       callbacks.onSuccess?.();
     },
