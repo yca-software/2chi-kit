@@ -1,6 +1,7 @@
 services:
   postgres:
-    image: timescale/timescaledb:latest-pg16
+    # timescale/timescaledb images do not include PostGIS; timescaledb-ha does (see Makefile POSTGRES_IMAGE).
+    image: timescale/timescaledb-ha:pg16-oss
     container_name: postgres_timescale_postgis
     ports:
       - "5432:5432"

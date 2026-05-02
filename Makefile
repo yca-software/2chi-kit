@@ -9,7 +9,7 @@
 	monitoring-up monitoring-down monitoring-logs infra-grafana-recreate all-up
 
 POSTGRES_CONTAINER := postgres_timescale_postgis
-POSTGRES_IMAGE     := timescale/timescaledb-ha:pg15-latest
+POSTGRES_IMAGE     := timescale/timescaledb-ha:pg16-oss
 POSTGRES_PORT      := 5432
 POSTGRES_USER      := postgres
 POSTGRES_PASSWORD  := postgres

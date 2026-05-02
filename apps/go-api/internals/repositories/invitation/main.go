@@ -81,22 +81,24 @@ func (r *repository) ListByOrganizationID(organizationID string) (*[]models.Invi
 	}, nil, "created_at DESC")
 }
 
-// CleanupStale deletes invitation rows at least StaleDataRetentionPeriod after they stopped being pending (accepted, revoked, or expired while still pending).
+// CleanupStale deletes invitation rows at least StaleDataRetentionPeriod after they were accepted or revoked,
+// or at least InvitationPendingExpiredCleanupMinAge after expires_at when still pending.
 func (r *repository) CleanupStale() error {
-	threshold := time.Now().Add(-constants.StaleDataRetentionPeriod)
+	staleThreshold := time.Now().Add(-constants.StaleDataRetentionPeriod)
+	pendingExpiredThreshold := time.Now().Add(-constants.InvitationPendingExpiredCleanupMinAge)
 	return r.BaseDelete(nil, squirrel.Or{
 		squirrel.And{
 			squirrel.NotEq{"accepted_at": nil},
-			squirrel.LtOrEq{"accepted_at": threshold},
+			squirrel.LtOrEq{"accepted_at": staleThreshold},
 		},
 		squirrel.And{
 			squirrel.NotEq{"revoked_at": nil},
-			squirrel.LtOrEq{"revoked_at": threshold},
+			squirrel.LtOrEq{"revoked_at": staleThreshold},
 		},
 		squirrel.And{
 			squirrel.Eq{"accepted_at": nil},
 			squirrel.Eq{"revoked_at": nil},
-			squirrel.LtOrEq{"expires_at": threshold},
+			squirrel.LtOrEq{"expires_at": pendingExpiredThreshold},
 		},
 	})
 }

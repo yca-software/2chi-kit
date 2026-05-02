@@ -221,7 +221,7 @@ func (s *InvitationRepositoryTestSuite) TestCleanupStale() {
 		VALUES
 			('c0000001-0000-0000-0000-000000000001', NOW() - INTERVAL '40 days', NOW() - INTERVAL '20 days', '00000001-0000-0000-0000-000000000001', '00000001-0000-0000-0000-000000000001', 'cleanup_a@example.com', '00000001-0000-0000-0000-000000000001', 'admin@example.com', 'cleanup_stale_accepted', NOW() - INTERVAL '35 days', NULL),
 			('c0000002-0000-0000-0000-000000000002', NOW() - INTERVAL '40 days', NOW() + INTERVAL '10 days', '00000001-0000-0000-0000-000000000001', '00000001-0000-0000-0000-000000000001', 'cleanup_r@example.com', '00000001-0000-0000-0000-000000000001', 'admin@example.com', 'cleanup_stale_revoked', NULL, NOW() - INTERVAL '35 days'),
-			('c0000003-0000-0000-0000-000000000003', NOW() - INTERVAL '40 days', NOW() - INTERVAL '35 days', '00000001-0000-0000-0000-000000000001', '00000001-0000-0000-0000-000000000001', 'cleanup_p@example.com', '00000001-0000-0000-0000-000000000001', 'admin@example.com', 'cleanup_stale_pending_expired', NULL, NULL),
+			('c0000003-0000-0000-0000-000000000003', NOW() - INTERVAL '120 days', NOW() - INTERVAL '95 days', '00000001-0000-0000-0000-000000000001', '00000001-0000-0000-0000-000000000001', 'cleanup_p@example.com', '00000001-0000-0000-0000-000000000001', 'admin@example.com', 'cleanup_stale_pending_expired', NULL, NULL),
 			('c0000004-0000-0000-0000-000000000004', NOW() - INTERVAL '10 days', NOW() - INTERVAL '5 days', '00000001-0000-0000-0000-000000000001', '00000001-0000-0000-0000-000000000001', 'cleanup_recent@example.com', '00000001-0000-0000-0000-000000000001', 'admin@example.com', 'cleanup_recent_pending_expired', NULL, NULL);
 	`)
 	require.NoError(s.T(), err)
